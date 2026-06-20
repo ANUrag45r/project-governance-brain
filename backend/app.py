@@ -10,6 +10,8 @@ import models.action
 import models.risk
 import models.skill
 import models.report
+import models.graph_edge
+
 
 # Create tables if they don't exist
 Base.metadata.create_all(bind=engine)
@@ -27,6 +29,20 @@ from routes.api import router as api_router
 
 app.include_router(api_router, prefix="/api")
 
+from database import SessionLocal
+from services.scheduler_service import SchedulerService
+
+scheduler = SchedulerService(SessionLocal)
+
+@app.on_event("startup")
+async def startup_event():
+    await scheduler.start()
+
+@app.on_event("shutdown")
+def shutdown_event():
+    scheduler.stop()
+
 @app.get("/")
 def read_root():
     return {"message": f"Welcome to {settings.PROJECT_NAME} API"}
+

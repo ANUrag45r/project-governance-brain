@@ -14,7 +14,7 @@ During Phase 1, the foundational architecture of the Hermes Project Governance B
    - Built a ChatGPT-style conversational interface (Hermes Chat) with mock queries.
 
 2. **FastAPI Backend Integration:**
-   - Switched from Dockerized PostgreSQL to a local serverless **SQLite** database for completely localized, container-free execution.
+   - Integrated with a local **PostgreSQL** database for robust, persistent data storage.
    - Built a dedicated FastAPI routing layer to serve Meetings, Actions, and Risks.
    - Seeded the database with realistic dummy sprint and architecture meeting data.
 
@@ -27,7 +27,7 @@ During Phase 1, the foundational architecture of the Hermes Project Governance B
 
 ## 💻 Local Setup Instructions
 
-You do not need Docker to run this application! Everything is configured to run natively on your machine using SQLite.
+Ensure your local PostgreSQL database is running (default credentials: `postgres` with password `Monunag22`).
 
 ### 1. Start the Backend (FastAPI)
 The backend uses Python. We have provided a helper script to automatically create a virtual environment, install dependencies, seed the database, and start the server.
@@ -50,7 +50,7 @@ npm run dev
 ```
 *(The UI will be available at `http://localhost:3000`)*
 
-> **Note on `.env` file:** For Phase 1, the `backend/.env` file has intentionally been committed to the repository so you can clone and run the application instantly. It only contains local SQLite connection strings. **Do not put real API keys in this file.**
+> **Note on `.env` file:** The `backend/.env` file is configured with the PostgreSQL connection string pointing to localhost. Make sure your local PostgreSQL database is running and matching the connection credentials.
 
 ---
 

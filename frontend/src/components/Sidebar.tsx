@@ -13,12 +13,12 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-64 h-full bg-white/5 backdrop-blur-md border-r border-white/10 flex flex-col p-4 space-y-2">
+    <aside className="w-64 h-full bg-zinc-50 dark:bg-[#0a0a0c]/20 backdrop-blur-md border-r border-zinc-200 dark:border-zinc-800/80 flex flex-col p-4 space-y-2 transition-colors duration-200">
       {links.map((link) => (
         <Link
           key={link.name}
           href={link.href}
-          className="px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all"
+          className="px-4 py-3 text-sm text-zinc-600 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200/50 dark:hover:bg-zinc-800/40 rounded-lg transition-all"
         >
           {link.name}
         </Link>

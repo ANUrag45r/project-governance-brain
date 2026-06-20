@@ -5,15 +5,15 @@ services:
     image: postgres:15-alpine
     container_name: gbrain_db
     environment:
-      POSTGRES_USER: gbrain
-      POSTGRES_PASSWORD: gbrainpassword
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Monunag22
       POSTGRES_DB: project_governance_brain
     ports:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U gbrain -d project_governance_brain"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d project_governance_brain"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -34,7 +34,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://gbrain:gbrainpassword@db:5432/project_governance_brain
+      - DATABASE_URL=postgresql://postgres:Monunag22@db:5432/project_governance_brain
       - REDIS_URL=redis://redis:6379/0
       - WATCHFILES_FORCE_POLLING=true
     volumes:

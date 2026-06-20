@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, Boolean
 from database import Base
 
 class Skill(Base):
@@ -8,3 +8,7 @@ class Skill(Base):
     name = Column(String, index=True)
     version = Column(String)
     author = Column(String)
+    description = Column(Text)
+    color = Column(String)
+    enabled = Column(Boolean, default=True)
+
