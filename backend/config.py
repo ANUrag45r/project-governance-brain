@@ -1,0 +1,11 @@
+from pydantic_settings import BaseSettings
+
+class Settings(BaseSettings):
+    PROJECT_NAME: str = "Project Governance Brain"
+    DATABASE_URL: str = "sqlite:///./gbrain.db"
+    REDIS_URL: str = "redis://localhost:6379/0"
+
+    class Config:
+        env_file = ".env"
+
+settings = Settings()

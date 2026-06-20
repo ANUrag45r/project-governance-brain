@@ -1,0 +1,25 @@
+# Node
+node_modules/
+.next/
+out/
+build/
+.npm/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+env/
+.venv/
+.pytest_cache/
+
+# Databases
+*.db
+*.sqlite3
+gbrain.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Note: .env is intentionally omitted from this gitignore per Phase 1 requirements
