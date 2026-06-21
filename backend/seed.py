@@ -20,6 +20,7 @@ def seed():
 
     # Create Meetings
     m1 = Meeting(
+        meeting_id="GBRAIN-1001",
         title="Sprint 12 Planning",
         source="MS Teams",
         summary="Discussed the upcoming features for the Sprint 12 release, focusing on the new authentication flow and database migrations.",
@@ -27,6 +28,7 @@ def seed():
         created_at=datetime.datetime(2026, 10, 24)
     )
     m2 = Meeting(
+        meeting_id="GBRAIN-1002",
         title="Architecture Review",
         source="MS Teams",
         summary="Reviewed the proposed changes to the backend microservices architecture to improve scalability.",
@@ -34,6 +36,7 @@ def seed():
         created_at=datetime.datetime(2026, 10, 22)
     )
     m3 = Meeting(
+        meeting_id="GBRAIN-1003",
         title="Weekly Sync",
         source="MS Teams",
         summary="Standard weekly sync to discuss blockers and progress.",

@@ -8,13 +8,14 @@ export default function MeetingsPage() {
   
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newMeetingId, setNewMeetingId] = useState("");
   const [newTitle, setNewTitle] = useState("");
   const [newTranscript, setNewTranscript] = useState("");
   const [uploadStatus, setUploadStatus] = useState<string | null>(null);
 
   const fetchMeetings = () => {
     setLoading(true);
-    fetch('http://localhost:8000/api/meetings')
+    fetch('http://localhost:8000/api/meetings', { cache: 'no-store' })
       .then(res => res.json())
       .then(data => {
         setMeetings(data);
@@ -31,14 +32,14 @@ export default function MeetingsPage() {
   }, []);
 
   const handleUpload = async () => {
-    if (!newTitle || !newTranscript) return;
+    if (!newMeetingId || !newTitle || !newTranscript) return;
     setUploadStatus("Starting upload...");
     
     try {
       const response = await fetch('http://localhost:8000/api/meetings/upload', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: newTitle, transcript: newTranscript })
+        body: JSON.stringify({ meeting_id: newMeetingId, title: newTitle, transcript: newTranscript })
       });
 
       if (!response.body) throw new Error("No response body");
@@ -62,6 +63,7 @@ export default function MeetingsPage() {
                 setTimeout(() => {
                   setIsModalOpen(false);
                   setUploadStatus(null);
+                  setNewMeetingId("");
                   setNewTitle("");
                   setNewTranscript("");
                   fetchMeetings();
@@ -117,6 +119,16 @@ export default function MeetingsPage() {
             ) : (
               <div className="space-y-4 flex-1 overflow-y-auto">
                 <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">GBrain Meeting ID</label>
+                  <input 
+                    type="text" 
+                    value={newMeetingId}
+                    onChange={(e) => setNewMeetingId(e.target.value)}
+                    placeholder="e.g. GBRAIN-1024" 
+                    className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                  />
+                </div>
+                <div>
                   <label className="block text-sm font-medium text-gray-300 mb-1">Meeting Title</label>
                   <input 
                     type="text" 
@@ -129,7 +141,7 @@ export default function MeetingsPage() {
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-1">Raw Transcript</label>
                   <textarea 
-                    rows={8}
+                    rows={6}
                     value={newTranscript}
                     onChange={(e) => setNewTranscript(e.target.value)}
                     placeholder="Paste the raw text transcript here..." 
@@ -185,9 +197,9 @@ export default function MeetingsPage() {
                 <div>
                   <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">Participants</p>
                   <div className="flex space-x-2">
-                    {meeting.participants.map((p, i) => (
-                      <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500/20 to-purple-500/20 border border-white/10 flex items-center justify-center text-xs text-white" title={p}>
-                        {p.charAt(0)}
+                    {meeting.participants.map((p: string, i: number) => (
+                  <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 border-2 border-[#0B1121] flex items-center justify-center text-xs font-bold text-white shadow-sm ring-1 ring-white/10 -ml-2 first:ml-0 transition-transform hover:scale-110 hover:z-10 cursor-pointer">
+                    {p.charAt(0)}
                       </div>
                     ))}
                   </div>

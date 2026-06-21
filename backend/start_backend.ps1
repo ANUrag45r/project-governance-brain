@@ -9,8 +9,7 @@ Write-Host "Activating virtual environment..."
 Write-Host "Installing dependencies..."
 pip install -r requirements.txt
 
-Write-Host "Seeding the database..."
-python seed.py
+# Database already seeded in initial setup
 
 Write-Host "Starting FastAPI backend..."
 uvicorn app:app --reload --host 0.0.0.0 --port 8000

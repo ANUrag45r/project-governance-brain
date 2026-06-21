@@ -5,7 +5,7 @@ class Action(Base):
     __tablename__ = "actions"
 
     action_id = Column(Integer, primary_key=True, index=True)
-    meeting_id = Column(Integer, ForeignKey("meetings.meeting_id"))
+    meeting_id = Column(String, ForeignKey("meetings.meeting_id"))
     task = Column(Text)
     owner = Column(String)
     status = Column(String)

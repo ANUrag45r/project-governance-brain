@@ -9,3 +9,5 @@ python-dotenv
 alembic
 pytest
 httpx
+pgvector
+minio
